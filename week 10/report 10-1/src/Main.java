@@ -3,34 +3,40 @@ import java.util.Scanner;
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-    public static void main(String[] args) throws Exception {
-        Scanner keyboard = new Scanner(System.in);
+    public static void main(String[] args) {
+        Scanner keyboard =  new Scanner(System.in);
+        int[] ip = new int[4];
+        int nogood = 0;
+        int totalVotes = 0;
+        int xdata;
 
-        // int[] java;
-        // java = new int[5];
+        System.out.println("투표를 시작합니다 (1~4번 중 후보 번호 입력)");
+        System.out.println("입력을 끝내려면 숫자 외의 값을 입력하세요.");
 
-        //  int[] java = new int[5];
+        while (true) {
 
-        float[] java1 = {95.0f, 70.0f, 80.0f, 75.0f, 100.0f};
 
-        int[] java = {95, 70, 80, 75, 100};
-        String name[] = {"홍길동", "이재명", "윤석열", "경복대", "오세훈"};
+            if (!keyboard.hasNextInt()) {
+                System.out.println("\n더 이상 입력이 없어 투표가 종료됩니다.");
+                break;
+            }
 
-        int i = 0;
-        while (i < name.length) {
-            System.out.printf("%s님의 JAVA 성적 입력 : ", name[i]);
-            java[i] = keyboard.nextInt();
+            xdata = keyboard.nextInt();
+            totalVotes++;
 
-            if (java[i] >= 0 && java[i] <= 100)
-                i++;
-            else {
-                System.err.println("ERROR : 0 ~ 100");
-                System.in.read();
+            if (xdata >= 1 && xdata <= 4) {
+                ip[xdata - 1]++;
+            } else {
+                nogood++;
             }
         }
 
-
-        for (i = 0; i < java.length; i++)
-            System.out.printf("%s JAVA 성적 : %3d 점\n", name[i], java[i]);
+        System.out.println("\n--- 투표 개표 결과 ---");
+        for (int i = 0; i < ip.length; i++) {
+            System.out.printf("%d번 후보 : %d표\n", i + 1, ip[i]);
+        }
+        System.out.printf("무효표 : %d표\n", nogood);
+        System.out.printf("총 투표수 : %d표\n", totalVotes);
+        System.out.println("----------------------");
     }
 }
